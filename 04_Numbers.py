@@ -22,7 +22,7 @@ print(max(2, my_var))
 print(min(4, 5))
 print(round(4.7))
 print(round(4.5))
-#5
+#5 importowanie wiekszej ilosci funkcji matematycznych
 from math import *
 print(floor(7.8))
 print(ceil(7.8))
