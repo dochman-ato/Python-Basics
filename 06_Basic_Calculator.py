@@ -7,5 +7,5 @@ print(result)
 result2 = num1 + num2
 print(result2)
 #3
-result3 = float(num1) + float(num2)
+result3 = num1 + num2
 print(result3)
