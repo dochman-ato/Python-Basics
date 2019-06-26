@@ -6,7 +6,7 @@ from jnpr.junos.exception import *
 junos_hosts = ["172.25.11.1", "1.1.1.1"]
 for ip in junos_hosts:
     try:
-        dev = Device(host=ip, user="lab", password="lab123")
+        dev = Device(host=ip, user="lab", password="lab123", auto_probe = 10)
         dev.open()
         config = Config(dev)
         config.lock()
