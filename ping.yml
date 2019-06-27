@@ -18,11 +18,11 @@
 
   tasks:
     - name: Execute ping
-      juniper_junos_command:
+      juniper_junos_ping:
         host="{{ ansible_host }}"
         user="{{ username }}"
         passwd="{{ password }}"
-        dest_ip="172.25.11.1"
+        dest_ip="172.25.11.2"
       register: response
 
     - name: Print the response
