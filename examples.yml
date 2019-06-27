@@ -1,0 +1,78 @@
+---
+- name: Examples of juniper_junos_command
+  hosts: -all
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+
+  tasks:
+    - name: Execute single "show version" command,
+      juniper_junos_command:
+        commands: "show version"
+      register: response
+
+    - name: Print the command output
+      debug:
+        var: response.stdout
+
+    - name: Execute three commands.
+      juniper_junos_command:
+        commands:
+          - "show version"
+          - "show system update"
+          - "show interface terse"
+      register: response
+
+    - name: Print the command output of each.
+      debug:
+        var: item.stdout
+      with_items: "{{ response.results }}"
+
+    - name: Two commands with XML output.
+      juniper_junos_command:
+        commands:
+          - "show route"
+          - "show lldp neighbors"
+        format: xml
+
+    - name: show route with XML output - show version with JSON output
+      juniper_junos_command:
+        commands:
+          - "show route"
+          - "show version"
+        formats:
+          - "xml"
+          - "json"
+
+    - name: save outputs in dest_dir
+      juniper_junos_command:
+        commands:
+          - "show route"
+          - "show version"
+        dest_dir: "./output"
+
+    - name: save output to dest
+      juniper_junos_command:
+        commands:
+          - "show system uptime"
+        dest: "/tmp/{{ inventory_hostname }}.uptime.output"
+
+
+····-·name:·save·output·to·dest
+······juniper_junos_command:
+········commands:
+··········-·"show·route"
+          - "show lldp neighbors"
+········dest:·"/tmp/{{·inventory_hostname·}}.commands.output"
+
+    - name: multiple commands, save outputs, but don't return them
+      juniper_junos_command:
+········commands:
+··········-·"show·route"
+··········-·"show·version"
+········formats:
+··········-·"xml"
+··········-·"json"
+        dest_dir: "/tmp/outputs/"
+        return_output: false
