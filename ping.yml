@@ -1,0 +1,30 @@
+---
+- name: get device uptime
+  hosts:
+      - all
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  vars_prompt:
+    - name: username
+      prompt: Junos Username
+      private: no
+
+    - name: password
+      prompt: Junos Password
+      private: yes
+
+  tasks:
+    - name: Execute ping
+      juniper_junos_command:
+        host="{{ ansible_host }}"
+        user="{{ username }}"
+        passwd="{{ password }}"
+        dest_ip="172.25.11.1"
+      register: response
+
+    - name: Print the response
+      debug:
+        var: response
