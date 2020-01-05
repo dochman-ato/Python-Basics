@@ -1,6 +1,6 @@
-
+﻿
 /*
-** automatic proxy configuration for 10.94.50.67 from proxyconf.my-it-solutions.net
+** automatic proxy configuration for 10.94.51.91 from proxyconf.my-it-solutions.net
 */
 
 function FindProxyForURL(url, host) {
